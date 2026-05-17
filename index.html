@@ -196,7 +196,10 @@
 
   /* sun gif slot at the bottom of hero message */
   .sun-top-slot{display:flex;justify-content:center;margin-bottom:14px;margin-top:-4px;}
-  .sun-video-top{width:clamp(110px,20vw,150px);height:auto;display:block;background:transparent;}
+  .sun-video-top{width:clamp(110px,20vw,150px);height:auto;display:block;background:transparent;pointer-events:none;}
+  .sun-video-top::-webkit-media-controls{display:none !important;}
+  .sun-video-top::-webkit-media-controls-panel{display:none !important;}
+  .sun-video-top::-webkit-media-controls-play-button{display:none !important;}
 
   /* countdown card — same paper-card treatment so it's readable */
   .cd-card{background:#FCFAF4;border:1px solid rgba(139,125,74,.25);
@@ -317,7 +320,7 @@
   <div class="hero-card">
     <div class="hero-unified">
 <div class="sun-top-slot">
-        <video autoplay loop muted playsinline class="sun-video-top" aria-hidden="true">
+        <video autoplay loop muted playsinline preload="auto" class="sun-video-top" aria-hidden="true" id="sunVideo">
           <source src="assets/sol.mp4" type="video/mp4"/>
         </video>
       </div>
@@ -509,6 +512,7 @@
 </footer>
 
 <script>
+  (function(){var v=document.getElementById('sunVideo');if(!v)return;v.muted=true;var p=v.play();if(p!==undefined){p.catch(function(){var fn=function(){v.play();document.removeEventListener('touchstart',fn);document.removeEventListener('click',fn);};document.addEventListener('touchstart',fn,{once:true});document.addEventListener('click',fn,{once:true});});}})();
   var navbar=document.getElementById('navbar');
   window.addEventListener('scroll',function(){
     if(window.scrollY>80)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');
