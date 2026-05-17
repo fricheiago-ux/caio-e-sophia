@@ -513,7 +513,7 @@
 </footer>
 
 <script>
-  (function(){var v=document.getElementById('sunVideo'),img=document.getElementById('sunPoster');if(!v)return;v.muted=true;function startVideo(){img&&(img.style.display='none');v.play();}if(img){img.addEventListener('click',startVideo,{once:true});}var p=v.play();if(p!==undefined){p.then(function(){img&&(img.style.display='none');}).catch(function(){img&&(img.style.display='block');});}})();
+  (function(){var v=document.getElementById('sunVideo'),img=document.getElementById('sunPoster');if(!v)return;v.muted=true;v.style.display='none';if(img)img.style.display='block';function startVideo(){if(img)img.style.display='none';v.style.display='block';v.play();}if(img)img.addEventListener('click',startVideo,{once:true});var p=v.play();if(p!==undefined){p.then(function(){if(img)img.style.display='none';v.style.display='block';}).catch(function(){v.style.display='none';if(img)img.style.display='block';});}})();
   var navbar=document.getElementById('navbar');
   window.addEventListener('scroll',function(){
     if(window.scrollY>80)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');
